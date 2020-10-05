@@ -2,7 +2,7 @@ import React from "react";
 import "./InfoWidget.css";
 import Widget from "./Widget";
 
-function InfoWidget({ data, title, titleAttr, valueAttr }) {
+function InfoWidget({ data, title, barColor, titleAttr, valueAttr }) {
   const max = Math.max.apply(
     Math,
     data.map(function (o) {
@@ -31,7 +31,10 @@ function InfoWidget({ data, title, titleAttr, valueAttr }) {
                   <span className="Widget__items_item_bar_wrapper">
                     <span
                       className="Widget__items_item_bar"
-                      style={{ width: `${(row[valueAttr] * 100) / max}%` }}
+                      style={{
+                        width: `${(row[valueAttr] * 100) / max}%`,
+                        backgroundColor: `rgba(${barColor})`,
+                      }}
                     ></span>
                   </span>
                 </li>
@@ -46,6 +49,7 @@ function InfoWidget({ data, title, titleAttr, valueAttr }) {
 
 InfoWidget.defaultProps = {
   data: [],
+  barColor: [0, 0, 0],
 };
 
 export default InfoWidget;

@@ -64,5 +64,5 @@
   left: 0;
   height: 0.25rem;
   background: red;
-  transition: width 0.25ms ease-in-out;
+  transition: width 0.25ms ease-in-out, color 0.25ms ease-in-out;
 }

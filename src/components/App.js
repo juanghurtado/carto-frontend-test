@@ -66,6 +66,7 @@ function App() {
           data={numberOfCountries}
           titleAttr="continent"
           valueAttr="num_countries"
+          barColor={mapConfig.fillColor}
         />
 
         <InfoWidget
@@ -75,6 +76,7 @@ function App() {
           data={populationPerContinent}
           titleAttr="continent"
           valueAttr="population"
+          barColor={mapConfig.fillColor}
         />
       </div>
     </div>

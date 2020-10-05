@@ -47,11 +47,11 @@ function StylesWidget(props) {
             onChange={handleOnClick}
             value={getKeyByValue(COLORS, props.config.lineColor)}
           >
-            <option value="black">Black</option>
-            <option value="white">White</option>
-            <option value="red">Red</option>
-            <option value="green">Green</option>
-            <option value="blue">Blue</option>
+            {Object.keys(COLORS).map((k, index) => (
+              <option value={k} key={index}>
+                {k}
+              </option>
+            ))}
           </select>
         </p>
 
@@ -64,11 +64,11 @@ function StylesWidget(props) {
             onChange={handleOnClick}
             value={getKeyByValue(COLORS, props.config.fillColor)}
           >
-            <option value="black">Black</option>
-            <option value="white">White</option>
-            <option value="red">Red</option>
-            <option value="green">Green</option>
-            <option value="blue">Blue</option>
+            {Object.keys(COLORS).map((k, index) => (
+              <option value={k} key={index}>
+                {k}
+              </option>
+            ))}
           </select>
         </p>
       </div>
