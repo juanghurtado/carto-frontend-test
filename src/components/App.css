@@ -9,8 +9,10 @@
 }
 
 .App__widgets {
+  font-size: 0.8rem;
   box-sizing: border-box;
   flex: 0 0 20%;
   padding: 1em;
   border-left: 1px solid #333;
+  overflow: auto;
 }

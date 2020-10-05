@@ -3,4 +3,66 @@
   border: 1px solid #eee;
   border-radius: 3px;
   margin-bottom: 1em;
+  position: relative;
+}
+
+.Widget__loading {
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 1.5rem;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 3px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.Widget__items {
+  margin: 1em 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.Widget__items .Widget__items_item {
+  position: relative;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+}
+
+.Widget__items .Widget__items_item .Widget__items_item_title {
+  flex: 1 1 auto;
+}
+
+.Widget__items .Widget__items_item .Widget__items_item_value {
+  background: #eee;
+  border-radius: 1rem;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.7rem;
+}
+
+.Widget__items .Widget__items_item .Widget__items_item_bar_wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 0.25rem;
+  background: #eee;
+  right: 0;
+}
+
+.Widget__items .Widget__items_item .Widget__items_item_bar {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 0.25rem;
+  background: red;
+  transition: width 0.15ms ease-in-out;
 }

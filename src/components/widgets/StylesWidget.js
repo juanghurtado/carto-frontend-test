@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { COLORS } from "../core/constants";
-import { getKeyByValue } from "../core/utils";
+import { COLORS } from "../../core/constants";
+import { getKeyByValue } from "../../core/utils";
 import Widget from "./Widget";
 
 function StylesWidget(props) {
