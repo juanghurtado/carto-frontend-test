@@ -1,3 +1,4 @@
+import { debounce } from "lodash";
 import React, { useEffect, useState } from "react";
 import { COLORS } from "../core/constants";
 import CartoService from "../services/carto-sql-service";
@@ -20,6 +21,20 @@ function App() {
     setMapConfig(newMapConfig);
   };
 
+  const [boundsChanged, setBoundsChanged] = useState(false);
+
+  const handleOnBoundsChange = debounce((bounds) => {
+    setBoundsChanged(true);
+
+    CartoService.getNumberOfCountriesGroupdByContinent(bounds).then((resp) => {
+      setNumberOfCountries(resp.data.rows);
+    });
+
+    CartoService.getPopulationPerContinent(bounds).then((resp) => {
+      setPopulationPerContinent(resp.data.rows);
+    });
+  }, 200);
+
   useEffect(() => {
     CartoService.getNumberOfCountriesGroupdByContinent().then((resp) => {
       setNumberOfCountries(resp.data.rows);
@@ -37,6 +52,7 @@ function App() {
           lineWidth={mapConfig.lineWidth}
           lineColor={mapConfig.lineColor}
           fillColor={mapConfig.fillColor}
+          onBoundsChange={handleOnBoundsChange}
         />
       </div>
 
@@ -44,14 +60,18 @@ function App() {
         <StylesWidget onChange={handleStylesWidgetChange} config={mapConfig} />
 
         <InfoWidget
-          title="Number of countries by continent"
+          title={`Number of countries by continent ${
+            boundsChanged ? "(on viewport)" : "(total)"
+          }`}
           data={numberOfCountries}
           titleAttr="continent"
           valueAttr="num_countries"
         />
 
         <InfoWidget
-          title="Population by continent"
+          title={`Population by continent ${
+            boundsChanged ? "(on viewport)" : "(total)"
+          }`}
           data={populationPerContinent}
           titleAttr="continent"
           valueAttr="population"

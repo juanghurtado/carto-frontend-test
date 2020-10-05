@@ -1,4 +1,5 @@
 import { CartoSQLLayer } from "@deck.gl/carto";
+import { WebMercatorViewport } from "@deck.gl/core";
 import DeckGL from "@deck.gl/react";
 import React from "react";
 
@@ -20,12 +21,21 @@ function Map(props) {
     }),
   ];
 
+  const handleOnViewStateChange = (viewport, viewState) => {
+    props.onBoundsChange(viewport.getBounds(viewState.zoom));
+  };
+
   return (
     <div className="Map">
       <DeckGL
         controller={true}
         initialViewState={INITIAL_VIEW_STATE}
         layers={layers}
+        onViewStateChange={({ viewState }) => {
+          const viewport = new WebMercatorViewport(viewState);
+
+          handleOnViewStateChange(viewport, viewState);
+        }}
       ></DeckGL>
     </div>
   );
@@ -35,6 +45,7 @@ Map.defaultProps = {
   lineWidth: 1,
   lineColor: [0, 0, 0],
   fillColor: [170, 170, 170],
+  onBoundsChange: () => {},
 };
 
 export default Map;
