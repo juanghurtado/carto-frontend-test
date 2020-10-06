@@ -17,6 +17,17 @@ I struggled a little bit with a couple of things (not because of being a hard ta
 
 I used a debounce function to limit the number of API calls.
 
+## Bonus 1
+
+Couldn't perform this task. It requires a deep knowledge about the "guts" of deck.gl, which I don't have. I could spend some more time trying to do it, but spare time is something I don't have much (with two little daughters requiring my attention at all times… LOL).
+
+What I think I would do to perform this task (after quick look on the deck.gl code) is:
+
+- extend `CartoLayer` to create a `CartoH3HexagonalLayer`
+- read data from Carto SQL API in the same way Carto SQL Layer do
+- transform data to add a `hex` attribute to each feature, using `geoToH3`from [h3-js](https://github.com/uber/h3-js)
+- override `renderLayers` from `CartoLayer` to render an `H3HexagonLayer` using the transformed data
+
 ## Bonus 2
 
 On this task I struggled a lot with feature filtering on the map. From the beginning I started using `DataFilterExtensions`, but it only worked on the first render, not reacting to events. Until I found out about `updateTriggers`.
