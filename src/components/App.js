@@ -10,6 +10,7 @@ import StylesWidget from "./widgets/StylesWidget";
 function App() {
   const [numberOfCountries, setNumberOfCountries] = useState();
   const [populationPerContinent, setPopulationPerContinent] = useState();
+  const [infoWidgetSelection, setInfoWidgetSelection] = useState([]);
 
   const [mapConfig, setMapConfig] = useState({
     lineWidth: 1,
@@ -35,6 +36,11 @@ function App() {
     });
   }, 200);
 
+  const handleInfoWidgetSelectionChange = (selection) => {
+    setInfoWidgetSelection(selection);
+    console.log(selection);
+  };
+
   useEffect(() => {
     CartoService.getNumberOfCountriesGroupdByContinent().then((resp) => {
       setNumberOfCountries(resp.data.rows);
@@ -53,6 +59,7 @@ function App() {
           lineColor={mapConfig.lineColor}
           fillColor={mapConfig.fillColor}
           onBoundsChange={handleOnBoundsChange}
+          filterByContinent={infoWidgetSelection}
         />
       </div>
 
@@ -67,6 +74,7 @@ function App() {
           titleAttr="continent"
           valueAttr="num_countries"
           barColor={mapConfig.fillColor}
+          onSelectedInfoChange={handleInfoWidgetSelectionChange}
         />
 
         <InfoWidget
@@ -77,6 +85,7 @@ function App() {
           titleAttr="continent"
           valueAttr="population"
           barColor={mapConfig.fillColor}
+          onSelectedInfoChange={handleInfoWidgetSelectionChange}
         />
       </div>
     </div>

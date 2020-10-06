@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
+import withSelections from "react-item-select";
 import "./InfoWidget.css";
 import Widget from "./Widget";
 
-function InfoWidget({ data, title, barColor, titleAttr, valueAttr }) {
-  const max = Math.max.apply(
+function InfoWidget({
+  data,
+  title,
+  barColor,
+  titleAttr,
+  valueAttr,
+  isItemSelected,
+  selections,
+  handleSelect,
+  onSelectedInfoChange,
+}) {
+  const maxValue = Math.max.apply(
     Math,
     data.map(function (o) {
       return o[valueAttr];
     })
   );
+
+  const handleItemClick = (clickedKey) => {
+    handleSelect(clickedKey);
+  };
+
+  useEffect(() => {
+    onSelectedInfoChange([...Object.keys(selections)]);
+  }, [selections]);
 
   return (
     <Widget>
@@ -21,7 +40,15 @@ function InfoWidget({ data, title, barColor, titleAttr, valueAttr }) {
 
             <ul className="Widget__items">
               {data.map((row, index) => (
-                <li className="Widget__items_item" key={index}>
+                <li
+                  key={row[titleAttr]}
+                  className={`Widget__items_item ${
+                    isItemSelected(row[titleAttr])
+                      ? "Widget__items_item_selected"
+                      : ""
+                  }`}
+                  onClick={() => handleItemClick(row[titleAttr])}
+                >
                   <span className="Widget__items_item_title">
                     {row[titleAttr]}
                   </span>
@@ -32,7 +59,7 @@ function InfoWidget({ data, title, barColor, titleAttr, valueAttr }) {
                     <span
                       className="Widget__items_item_bar"
                       style={{
-                        width: `${(row[valueAttr] * 100) / max}%`,
+                        width: `${(row[valueAttr] * 100) / maxValue}%`,
                         backgroundColor: `rgba(${barColor})`,
                       }}
                     ></span>
@@ -50,6 +77,7 @@ function InfoWidget({ data, title, barColor, titleAttr, valueAttr }) {
 InfoWidget.defaultProps = {
   data: [],
   barColor: [0, 0, 0],
+  onSelectedInfoChange: () => {},
 };
 
-export default InfoWidget;
+export default withSelections(InfoWidget);

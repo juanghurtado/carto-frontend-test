@@ -32,9 +32,22 @@
 
 .Widget__items .Widget__items_item {
   position: relative;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.5rem 1rem 0.5rem;
   display: flex;
+  border-radius: 3px;
+  border: 1px solid #fff;
+}
+
+.Widget__items .Widget__items_item:hover {
+  background-color: #efefef;
+  border-color: #efefef;
+  cursor: pointer;
+}
+
+.Widget__items .Widget__items_item.Widget__items_item_selected {
+  border-color: #aaa;
+  background-color: #efefef;
 }
 
 .Widget__items .Widget__items_item .Widget__items_item_title {
@@ -42,7 +55,7 @@
 }
 
 .Widget__items .Widget__items_item .Widget__items_item_value {
-  background: #eee;
+  background: #ddd;
   border-radius: 1rem;
   padding: 0.15rem 0.5rem;
   font-size: 0.7rem;
@@ -50,11 +63,11 @@
 
 .Widget__items .Widget__items_item .Widget__items_item_bar_wrapper {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 0.25rem;
+  left: 0.25rem;
   height: 0.25rem;
-  background: #eee;
-  right: 0;
+  background: #ddd;
+  right: 0.25rem;
 }
 
 .Widget__items .Widget__items_item .Widget__items_item_bar {
