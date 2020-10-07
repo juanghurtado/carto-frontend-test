@@ -8,7 +8,7 @@ Nothing special here. Just learning how to use Deck.gl with `CartoSQLLayer`. And
 
 Learned how to use Carto SQL API. I decided to build a common InfoWidget for both queries (number of countries by continent and population by continent) since both of them build the same UI structure.
 
-## Part 3
+## Part 3
 
 I struggled a little bit with a couple of things (not because of being a hard task, just because of my small knowledge of geospatial stuff):
 
